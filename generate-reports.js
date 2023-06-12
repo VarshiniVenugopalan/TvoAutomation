@@ -19,7 +19,7 @@ async function generateReport() {
       reportTitle: 'Cypress Test Execution Report',
     });
 
-    console.log('HTML report generated successfully!');
+    console.log('HTML report generated successfully!!');
   } catch (error) {
     console.error('Error generating HTML report:', error);
   }
