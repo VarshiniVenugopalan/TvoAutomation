@@ -1,21 +1,22 @@
-name: Cypress tests
+name: Artifacts
 on: push
 jobs:
   cypress-run:
-    name: Cypress run
     runs-on: ubuntu-22.04
+    name: Artifacts
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+      # after the test run completes store videos and any screenshots
+      - uses: actions/upload-artifact@v3
+        # add the line below to store screenshots only on failures
+        # if: failure()
         with:
-          record: true
-        env:
-          # pass the Cypress Cloud record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # pass GitHub token to allow accurately detecting a build vs a re-run build
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # pass the project ID from the secrets through environment variable
-          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
