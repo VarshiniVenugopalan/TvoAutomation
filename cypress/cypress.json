@@ -3,10 +3,17 @@
     "viewportWidth": 1280,
     "viewportHeight": 720,
     "reporter": "mochawesome",
+    "browser":"chrome",
     "reporterOptions": {
         "reportDir": "cypress/reports",
         "overwrite": false,
         "html": false,
         "json": true
+    },
+    "chromeWebSecurity": false,
+    "chromeWebSecurityUrlOverrides": {
+        "*": {
+            "port": 9222
+        }
     }
 }
