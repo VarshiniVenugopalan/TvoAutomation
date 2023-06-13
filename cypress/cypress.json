@@ -1,5 +1,4 @@
 {
-    "baseUrl": "https://tvolearn.com/",
     "viewportWidth": 1280,
     "viewportHeight": 720,
     "reporter": "mochawesome",
