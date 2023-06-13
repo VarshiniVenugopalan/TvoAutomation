@@ -1,4 +1,4 @@
-describe('My Simple Test', () => {
+describe('Simple Test', () => {
   it('Visit TVO Learn', () => {
    // expect(true).to.equal(false)
     cy.visit('https://tvolearn.com/')
