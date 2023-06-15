@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cy:run_spec":"npx cypress run  --reporter mochawesome",
-    "cy:run_browser":"npm run cy:run_spec -- --browser chrome & npm run cy:run_spec -- --browser edge"
+    "cy:run_browser":"npm run cy:run_spec -- --browser chrome & npm run cy:run_spec -- --browser electron"
   },
   "author": "",
   "license": "ISC",
