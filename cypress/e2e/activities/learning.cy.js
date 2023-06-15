@@ -9,11 +9,9 @@ describe('Activities Page', () => {
     cy.contains('Go To Learning Activities').click()
     cy.get('#activity-menu>li>span>a').each((link) => {
       const href = link.attr('href');
-      // Assert that the link has a valid href attribute
       expect(href).to.not.be.empty;
-      // Check the link's validity by making an HTTP request
       cy.request(href).then((response) => {
-        // Assert that the response is successful (status code 2xx)
+        // Assert based on the status code
         expect(response.status).to.be.oneOf([200, 201, 202]);
       });
     }); 
