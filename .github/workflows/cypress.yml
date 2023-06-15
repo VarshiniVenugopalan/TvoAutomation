@@ -1,34 +1,22 @@
-name: Parallel Cypress Tests
+name: Artifacts
 on: push
 jobs:
-  test:
-    name: Cypress run
+  cypress-run:
     runs-on: ubuntu-22.04
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving Cypress Cloud hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-      matrix:
-        # run 3 copies of the current job in parallel
-        containers: [1, 2]
+    name: Artifacts
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      # because of "record" and "parallel" parameters
-      # these containers will load balance all found tests among themselves
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+      # after the test run completes store videos and any screenshots
+      - uses: actions/upload-artifact@v3
+        # add the line below to store screenshots only on failures
+        # if: failure()
         with:
-          record: true
-          parallel: true
-          browser : chrome
-          group: 'Simple Test'
-        env:
-          # pass the Cypress Cloud record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
