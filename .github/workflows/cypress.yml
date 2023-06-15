@@ -20,7 +20,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          command: npm run --browser chrome
+          command: npm run cy:run_browser
           record: true
           parallel : true
         env:
