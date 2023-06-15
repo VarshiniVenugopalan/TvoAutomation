@@ -20,7 +20,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          command: npx cypress run  --reporter mochawesome,npm run cy:run_spec -- --browser chrome & npm run cy:run_spec -- --browser electron
+          command: npm cypress run --browser chrome & npm cypress run --browser electron --reporter mochawesome
           record: true
           parallel : true
         env:
