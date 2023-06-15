@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run --reporter mochawesome"
+    "cy:run_spec":"npx cypress run  --reporter mochawesome",
+    "cy:run_browser":"npm run cy:run_spec -- --browser chrome & npm run cy:run_spec -- --browser edge"
   },
   "author": "",
   "license": "ISC",
